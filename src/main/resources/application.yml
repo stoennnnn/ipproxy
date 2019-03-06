@@ -1,1 +1,3 @@
-
+#https://weixin.sogou.com/
+server:
+  port: 7777
