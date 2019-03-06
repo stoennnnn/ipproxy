@@ -10,11 +10,11 @@ public class IPEntity {
     public static final int TYPE_HTTP = 0;
     public static final int TYPE_HTTPS = 1;
     private  String ip;
-    private Integer port;
+    private int port;
     //ip类型
-    private Integer type;
+    private int type;
 
-    public IPEntity(String ip, Integer port, Integer type) {
+    public IPEntity(String ip, Integer port, int type) {
         this.ip = ip;
         this.port = port;
         this.type = type;

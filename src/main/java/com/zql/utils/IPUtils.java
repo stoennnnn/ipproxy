@@ -9,6 +9,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Created by 26725 on 2019/3/6.
@@ -27,8 +28,8 @@ public class IPUtils {
         //设置请求超时和读取超时时间，如果返回200则视为有效ip
         RequestConfig requestConfig = RequestConfig.custom()
                 .setProxy(proxy)
-                .setConnectTimeout(3000)
-                .setSocketTimeout(3000)
+                .setConnectTimeout(5000)
+                .setSocketTimeout(5000)
                 .build();
         httpGet.setConfig(requestConfig);
         //设置请求头
@@ -37,22 +38,16 @@ public class IPUtils {
         CloseableHttpResponse httpResponse = null;
         try {
             httpResponse = httpClient.execute(httpGet);
+            if (!Optional.ofNullable(httpResponse).isPresent()){
+                int statusCode = httpResponse.getStatusLine().getStatusCode();
+                if (200 == statusCode){
+                    return "true";
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
         //得到返回码
-        int statusCode = httpResponse.getStatusLine().getStatusCode();
-        if (200 == statusCode) {
-            return "true";
-        } else
-            return "false";
-    }
-
-    /**
-     *  把ip存放到队列
-     *  需要支持多线程并发操作
-     */
-    public static void saveIP(){
-
+        return "false";
     }
 }

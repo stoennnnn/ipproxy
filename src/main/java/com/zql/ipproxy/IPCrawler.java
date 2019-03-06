@@ -16,7 +16,7 @@ import java.util.List;
  * Created by  on 2019-3-5.
  */
 @Component
-public class IPCrawer {
+public class IPCrawler {
     private static String HTTP_URL = "https://www.xicidaili.com/wt/";
     private static String HTTPS_URL = "https://www.xicidaili.com/wn/";
 
@@ -52,7 +52,7 @@ public class IPCrawer {
      * @return
      */
     private List<IPEntity> crawl(String url, Integer page,List<IPEntity> ips ) {
-        String responseContent = HttpUtils.getResponseContent(url);
+        String responseContent = HttpUtils.getResponseContent(url,null);
         Document doc = Jsoup.parse(responseContent);
         //获取本页的ip数据
         Elements elements = doc.getElementById("ip_list").select("tr");

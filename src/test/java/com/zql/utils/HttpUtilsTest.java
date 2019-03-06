@@ -16,11 +16,12 @@ public class HttpUtilsTest {
 //    private HttpUtils httpUtilsl;
     @Test
     public void getResponseContent() throws Exception {
-        IPEntity ipEntity = new IPEntity("78.28.114.8", 53901, 1);
+        IPEntity ipEntity = new IPEntity("114.249.119.138", 8320, 1);
+        String utl4="http://www.data5u.com/free/index.html";
         String url = "https://www.baidu.com/";
         String url2 = "https://weixin.sogou.com/weixin?type=1&s_from=input&query=javastack&ie=utf8&_sug_=n&_sug_type_=";
         String url3 = "https://mp.weixin.qq.com/profile?src=3&timestamp=1551776786&ver=1&signature=EsElXhmCBhsgzM5ityjUjqakfLJLpIjmDiywLjZag4mLcP-gTBtujaicZCyg27BKH2r-SE3T5L6XJLaY0lxunw==";
-        String sb = HttpUtils.getResponseContent(url3, null, ipEntity);
+        String sb = HttpUtils.getResponseContent(url, null);
         System.out.println(sb);
     }
 
