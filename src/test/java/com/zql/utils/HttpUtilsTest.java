@@ -16,12 +16,11 @@ public class HttpUtilsTest {
 //    private HttpUtils httpUtilsl;
     @Test
     public void getResponseContent() throws Exception {
-        IPEntity ipEntity = new IPEntity("114.249.119.138", 8320, 1);
-        String utl4="http://www.data5u.com/free/index.html";
-        String url = "https://www.baidu.com/";
-        String url2 = "https://weixin.sogou.com/weixin?type=1&s_from=input&query=javastack&ie=utf8&_sug_=n&_sug_type_=";
-        String url3 = "https://mp.weixin.qq.com/profile?src=3&timestamp=1551776786&ver=1&signature=EsElXhmCBhsgzM5ityjUjqakfLJLpIjmDiywLjZag4mLcP-gTBtujaicZCyg27BKH2r-SE3T5L6XJLaY0lxunw==";
-        String sb = HttpUtils.getResponseContent(url, null);
+        IPEntity ipEntity = new IPEntity("122.136.212.132", 53281, 1);
+        String utl4="http://31f.cn/https-proxy/";
+        String url3 = "http://weixin.sogou.com/weixin?type=1&ie=utf8&query=javatuanzhang";
+        String url5="http://mp.weixin.qq.com/profile?src=3&timestamp=1552144040&ver=1&signature=Jh-ByW8AUU9Sqnp1-zzKRJ1dzZXoQTK4DpJt*GUAdbfRyRTzXNizMhY05Uapvew-B9fp8zDLjvvHwuO4XkQMqw==";
+        String sb = HttpUtils.getResponseContent(url5, ipEntity);
         System.out.println(sb);
     }
 

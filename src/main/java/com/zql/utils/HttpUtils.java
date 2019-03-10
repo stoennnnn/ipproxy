@@ -9,9 +9,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * @author Asche
@@ -37,24 +38,35 @@ public class HttpUtils {
                     .setConnectionRequestTimeout(5000) // 设置请求超时时间
                     .setSocketTimeout(5000)
                     .build();
+        }else{
+            requestConfig = RequestConfig.custom()
+                    .setConnectTimeout(5000)//设置连接超时时间
+                    .setConnectionRequestTimeout(5000) // 设置请求超时时间
+                    .setSocketTimeout(5000)
+                    .build();
+            httpGet.setConfig(requestConfig);
         }
-        requestConfig = RequestConfig.custom()
-                .setConnectTimeout(5000)//设置连接超时时间
-                .setConnectionRequestTimeout(5000) // 设置请求超时时间
-                .setSocketTimeout(5000)
-                .build();
-        httpGet.setConfig(requestConfig);
         //设置请求头
-//        httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) " +
-//                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Safari/537.36");
+        httpGet.setHeader("Accept","text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+        httpGet.setHeader("Accept-Encoding","gzip, deflate, br");
+        httpGet.setHeader("Accept-Language","zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2");
+        httpGet.setHeader("Connection","keep-alive");
+        String cookie="SUV=004547B275AF843E5A93B8185A12B008; SUID=89F257DF3965860A5A976E37000AB954; IPLOC=CN5101; SNUID=F3DDF3295B5EDFF8A09BF9935C9D73D2; ad=gZllllllll2tbQRUlllllVeHY2ylllllNzMRYlllll9lllllVVxlw@@@@@@@@@@@; ABTEST=7|1551272732|v1; weixinIndexVisited=1; pgv_pvi=8241631232; sct=5";
+        httpGet.setHeader("Cookie",cookie);
+        httpGet.setHeader("Host","weixin.sogou.com");
+        httpGet.setHeader("Upgrade-Insecure-Requests","1");
+        httpGet.setHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0");
         CloseableHttpResponse httpResponse;
         try {
             httpResponse = httpClient.execute(httpGet);
-            if (!Optional.ofNullable(httpResponse).isPresent()) {
-                if (200 == httpResponse.getStatusLine().getStatusCode()) {
-                    String htmls = EntityUtils.toString(httpResponse.getEntity());
-                }
-            }
+            String s = EntityUtils.toString(httpResponse.getEntity(),"UTF-8");
+            Document doc = Jsoup.parse(s);
+            System.out.println(222);
+//            if (!Optional.ofNullable(httpResponse).isPresent()) {
+//                if (200 == httpResponse.getStatusLine().getStatusCode()) {
+//                    String htmls = EntityUtils.toString(httpResponse.getEntity());
+//                }
+            //}
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
